@@ -1,4 +1,41 @@
+import {
+  createColumnHelper,
+  getCoreRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+
+const columnHelper = createColumnHelper();
+
+const mockData = [
+  {
+    id: 1,
+    name: "홍길동",
+    age: 30,
+  },
+  {
+    id: 2,
+    name: "김철수",
+    age: 25,
+  },
+  {
+    id: 3,
+    name: "이영희",
+    age: 28,
+  },
+];
+
+const columns = [
+  columnHelper.accessor("id", { header: "번호" }),
+  columnHelper.accessor("id", { header: "이름" }),
+  columnHelper.accessor("id", { header: "나이" }),
+];
+
 const PagesBoard = () => {
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  });
   return (
     <>
       <div style={{ margin: 100 }}>
@@ -69,6 +106,15 @@ const PagesBoard = () => {
             </li>
           </ul>
         </fieldset>
+        <div className="flex justify-between items-center gap-5">
+          <div className="flex items-center gap-4">
+            <strong className="font-medium leading-none text-black">
+              총 234건
+            </strong>
+            <div className="bg-gray-200 p-2.5">셀렉트폼</div>
+          </div>
+          <div className="flex items-center gap-4 justify-end">버튼들</div>
+        </div>
         <br />
         <br />
         <br />
