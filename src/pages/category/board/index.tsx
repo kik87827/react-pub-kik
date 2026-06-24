@@ -1,5 +1,6 @@
 import {
   createColumnHelper,
+  flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -32,7 +33,7 @@ const columns = [
 
 const PagesBoard = () => {
   const table = useReactTable({
-    data,
+    mockData,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -106,7 +107,7 @@ const PagesBoard = () => {
             </li>
           </ul>
         </fieldset>
-        <div className="flex justify-between items-center gap-5">
+        <div className="flex justify-between items-center gap-5 mb-4">
           <div className="flex items-center gap-4">
             <strong className="font-medium leading-none text-black">
               총 234건
@@ -115,14 +116,41 @@ const PagesBoard = () => {
           </div>
           <div className="flex items-center gap-4 justify-end">버튼들</div>
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
+        <div className="">
+          <table border={1} cellPadding={10}>
+            <thead>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <th key={header.id}>
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody>
+              {table.getRowModel().rows.map((row) => (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id}>
+                      {flexRender(
+                        cell.column.columnRef.cell,
+                        cell.getContext(),
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );
 };
 
 export default PagesBoard;
-/* Filter */

@@ -4,7 +4,7 @@ import PagesCategoryEngineering from "@/pages/category/engineering";
 import PagesCategoryDesign from "@/pages/category/design";
 import PagesArticle from "@pages/article";
 import PagesNotFound from "@/pages/notfound";
-import PagesBoard from "@/pages/board";
+import PagesBoard from "@/pages/category/board";
 
 const RouteComponent = () => {
   return (
