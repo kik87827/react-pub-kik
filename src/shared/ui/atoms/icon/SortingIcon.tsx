@@ -1,0 +1,25 @@
+type iconProps = React.SVGProps<SVGSVGElement> & {
+  theme?: string;
+};
+
+const SortingIcon = ({ theme = "#333" }: iconProps) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M11.3333 2.66699V13.3337M14 10.667L11.3333 13.3337L8.66667 10.667M4.66667 13.3337V2.66699M7.33333 5.33366L4.66667 2.66699L2 5.33366"
+        stroke={theme}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export default SortingIcon;

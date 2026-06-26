@@ -6,6 +6,7 @@ import PagesArticle from "@pages/article";
 import PagesNotFound from "@/pages/notfound";
 import PagesBoard from "@/pages/category/board";
 import BasicTable from "@/pages/category/tanstack";
+import PagesSample from "@/pages/category/sample";
 
 const RouteComponent = () => {
   return (
@@ -17,6 +18,7 @@ const RouteComponent = () => {
           <Route path="engineering" element={<PagesCategoryEngineering />} />
           <Route path="design" element={<PagesCategoryDesign />} />
           <Route path="board" element={<PagesBoard />} />
+          <Route path="sample" element={<PagesSample />} />
           <Route path="tanstack" element={<BasicTable />} />
         </Route>
 
