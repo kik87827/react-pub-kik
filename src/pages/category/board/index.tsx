@@ -20,6 +20,13 @@ import {
   type RowSelectionState, // ✅ 추가
 } from "@tanstack/react-table";
 import { Pagination } from "@/shared/ui";
+import PenIcon from "@/shared/ui/atoms/icon/PenIcon";
+import SearchIcon from "@/shared/ui/atoms/icon/SearchIcon";
+import { Button } from "@radix-ui/themes";
+import RefreshIcon from "@/shared/ui/atoms/icon/RefreshIcon";
+import SortingIcon from "@/shared/ui/atoms/icon/SortingIcon";
+import EditIcon from "@/shared/ui/atoms/icon/EditIcon";
+import PlusIcon from "@/shared/ui/atoms/icon/PlusIcon";
 
 
 const data = [
@@ -245,7 +252,7 @@ const columns: ColumnDef<Row>[] = [
     id: "action",
     header: "",
     cell: ({ row }) => (
-      <button onClick={() => console.log(row.original)}>✏️</button>
+      <button className="cursor-pointer inline-flex justify-center items-center" onClick={() => console.log(row.original)}><PenIcon /></button>
     ),
   },
 ];
@@ -297,7 +304,7 @@ const PagesBoard = () => {
     category: "",
     title: "",
     missingLang: "",
-    action: "",
+    action: "text-center text-[0] leading-[0] align-middle",
   };
   const labelStyle =
     "font-semibold text-sm leading-[140%] text-[#333333] whitespace-nowrap";
@@ -353,7 +360,14 @@ const PagesBoard = () => {
               <div className="bg-gray-200 p-2.5">폼요소</div>
             </li>
             <li className="col-span-6">
-              <div className="flex justify-end">버튼들</div>
+              <div className="flex justify-end gap-2">
+                <Button color="gray" variant="surface">
+                  <RefreshIcon /> Clear
+                </Button>
+                <Button className="bg-[#36394F]! text-white! hover:bg-[#4D526F]!">
+                  <SearchIcon theme="white" /> Search
+                </Button>
+              </div>
             </li>
           </ul>
         </fieldset>
@@ -364,7 +378,17 @@ const PagesBoard = () => {
             </strong>
             <div className="bg-gray-200 p-2.5">셀렉트폼</div>
           </div>
-          <div className="flex items-center gap-4 justify-end">버튼들</div>
+          <div className="flex items-center gap-2 justify-end">
+            <Button color="gray" variant="surface">
+              <SortingIcon /> Sorting
+            </Button>
+            <Button color="gray" variant="surface">
+              <EditIcon /> Edit Selected
+            </Button>
+            <Button className="bg-[#1A94FF]! text-white! hover:bg-[#168df6]!">
+              <PlusIcon theme="white" /> Create
+            </Button>
+          </div>
         </div>
         <table className="w-full table-fixed">
           <colgroup>
@@ -407,7 +431,7 @@ const PagesBoard = () => {
                 {row.getVisibleCells().map((cell) => (
                   <td
                     key={cell.id}
-                    className={`box-border p-2.5 max-h-13 border-b border-[#E6E7EE] ${
+                    className={`box-border p-2.5 align-middle max-h-13 border-b border-[#E6E7EE] ${
                       tdClassMap[cell.column.id] ?? ""
                     }`}
                   >
