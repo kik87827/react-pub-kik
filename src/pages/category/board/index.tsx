@@ -19,6 +19,8 @@ import {
   type SortingState,
   type RowSelectionState, // ✅ 추가
 } from "@tanstack/react-table";
+import { Pagination } from "@/shared/ui";
+
 
 const data = [
   {
@@ -297,7 +299,8 @@ const PagesBoard = () => {
     missingLang: "",
     action: "",
   };
-
+  const labelStyle =
+    "font-semibold text-sm leading-[140%] text-[#333333] whitespace-nowrap";
   return (
     <>
       <div style={{ margin: 100 }}>
@@ -310,10 +313,7 @@ const PagesBoard = () => {
           <legend className="sr-only">FAQ 검색</legend>
           <ul className="grid grid-cols-[3fr_7fr_3fr_7fr_3fr_7fr_3fr_7fr] items-center gap-y-5 gap-x-3.25">
             <li>
-              <label
-                htmlFor="search_form_item_01"
-                className="font-semibold text-sm leading-[140%] text-[#333333] whitespace-nowrap"
-              >
+              <label htmlFor="search_form_item_01" className={labelStyle}>
                 노출여부
               </label>
             </li>
@@ -321,10 +321,7 @@ const PagesBoard = () => {
               <div className="bg-gray-200 p-2.5">폼요소</div>
             </li>
             <li>
-              <label
-                htmlFor="search_form_item_02"
-                className="font-semibold text-sm leading-[140%] text-[#333333] whitespace-nowrap"
-              >
+              <label htmlFor="search_form_item_02" className={labelStyle}>
                 국가
               </label>
             </li>
@@ -332,10 +329,7 @@ const PagesBoard = () => {
               <div className="bg-gray-200 p-2.5">폼요소</div>
             </li>
             <li>
-              <label
-                htmlFor="search_form_item_03"
-                className="font-semibold text-sm leading-[140%] text-[#333333] whitespace-nowrap"
-              >
+              <label htmlFor="search_form_item_03" className={labelStyle}>
                 카테고리
               </label>
             </li>
@@ -343,10 +337,7 @@ const PagesBoard = () => {
               <div className="bg-gray-200 p-2.5">폼요소</div>
             </li>
             <li>
-              <label
-                htmlFor="search_form_item_04"
-                className="font-semibold text-sm leading-[140%] text-[#333333] whitespace-nowrap"
-              >
+              <label htmlFor="search_form_item_04" className={labelStyle}>
                 미입력 언어
               </label>
             </li>
@@ -354,10 +345,7 @@ const PagesBoard = () => {
               <div className="bg-gray-200 p-2.5">폼요소</div>
             </li>
             <li>
-              <label
-                htmlFor="search_form_item_05"
-                className="font-semibold text-sm leading-[140%] text-[#333333] whitespace-nowrap"
-              >
+              <label htmlFor="search_form_item_05" className={labelStyle}>
                 검색어
               </label>
             </li>
@@ -395,11 +383,13 @@ const PagesBoard = () => {
                   <th
                     key={header.id}
                     onClick={header.column.getToggleSortingHandler()}
-                    className={`cursor-pointer bg-[#4D526F] text-[13px] font-semibold text-white p-2.5 min-h-10.5 box-border ${thClassMap[header.column.id] ?? ""}`}
+                    className={`cursor-pointer bg-[#4D526F] text-[13px] font-semibold text-white p-2.5 min-h-10.5 box-border ${
+                      thClassMap[header.column.id] ?? ""
+                    }`}
                   >
                     {flexRender(
                       header.column.columnDef.header,
-                      header.getContext(),
+                      header.getContext()
                     )}
                     {{
                       asc: " ▲",
@@ -417,7 +407,9 @@ const PagesBoard = () => {
                 {row.getVisibleCells().map((cell) => (
                   <td
                     key={cell.id}
-                    className={`box-border p-2.5 max-h-13 border-b border-[#E6E7EE] ${tdClassMap[cell.column.id] ?? ""}`}
+                    className={`box-border p-2.5 max-h-13 border-b border-[#E6E7EE] ${
+                      tdClassMap[cell.column.id] ?? ""
+                    }`}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
@@ -426,61 +418,7 @@ const PagesBoard = () => {
             ))}
           </tbody>
         </table>
-        <div
-          style={{
-            marginTop: "12px",
-            display: "flex",
-            gap: "12px",
-            justifyContent: "center",
-          }}
-        >
-          <button
-            onClick={() => table.firstPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            ≪
-          </button>
-
-          <button
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            ‹
-          </button>
-
-          {Array.from({ length: table.getPageCount() }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => table.setPageIndex(index)}
-              style={{
-                color:
-                  table.getState().pagination.pageIndex === index
-                    ? "#0066ff"
-                    : "#666",
-                fontWeight:
-                  table.getState().pagination.pageIndex === index
-                    ? "bold"
-                    : "normal",
-              }}
-            >
-              {index + 1}
-            </button>
-          ))}
-
-          <button
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            ›
-          </button>
-
-          <button
-            onClick={() => table.lastPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            ≫
-          </button>
-        </div>
+        <Pagination table={table} />
       </div>
     </>
   );
