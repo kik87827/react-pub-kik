@@ -315,7 +315,6 @@ const PagesBoard = () => {
         <br />
         <br />
         <br />
-        21
         <fieldset className="bg-[#f5f5f8] rounded-lg px-6 py-4.5 mb-6">
           <legend className="sr-only">FAQ 검색</legend>
           <ul className="grid grid-cols-[3fr_7fr_3fr_7fr_3fr_7fr_3fr_7fr] items-center gap-y-5 gap-x-3.25">
