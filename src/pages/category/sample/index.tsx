@@ -1,3 +1,4 @@
+import Checkbox from "@/shared/ui/atoms/checkbox";
 import EditIcon from "@/shared/ui/atoms/icon/EditIcon";
 import PenIcon from "@/shared/ui/atoms/icon/PenIcon";
 import SearchIcon from "@/shared/ui/atoms/icon/SearchIcon";
@@ -43,12 +44,6 @@ const PagesSample = () => {
               Grape
             </Select.Item>
           </Select.Group>
-          <Select.Separator />
-          <Select.Group>
-            <Select.Label>Vegetables</Select.Label>
-            <Select.Item value="carrot">Carrot</Select.Item>
-            <Select.Item value="potato">Potato</Select.Item>
-          </Select.Group>
         </Select.Content>
       </Select.Root>
 
@@ -62,6 +57,9 @@ const PagesSample = () => {
         <PenIcon />
         <WarnIcon />
       </Flex>
+
+      <br />
+      <Checkbox />
     </div>
   );
 };

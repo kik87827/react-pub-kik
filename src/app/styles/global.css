@@ -20,3 +20,7 @@
     @apply cursor-pointer;
   }
 }
+
+/* radix custom */
+.select-container{}
+.select-container .rt-SelectTrigger{width:100%;}

@@ -19,15 +19,16 @@ import {
   type SortingState,
   type RowSelectionState, // ✅ 추가
 } from "@tanstack/react-table";
-import { Pagination } from "@/shared/ui";
+import { InputCustom, Pagination } from "@/shared/ui";
 import PenIcon from "@/shared/ui/atoms/icon/PenIcon";
 import SearchIcon from "@/shared/ui/atoms/icon/SearchIcon";
-import { Button } from "@radix-ui/themes";
+import { Button, Select } from "@radix-ui/themes";
 import RefreshIcon from "@/shared/ui/atoms/icon/RefreshIcon";
 import SortingIcon from "@/shared/ui/atoms/icon/SortingIcon";
 import EditIcon from "@/shared/ui/atoms/icon/EditIcon";
 import PlusIcon from "@/shared/ui/atoms/icon/PlusIcon";
-
+import WarnIcon from "@/shared/ui/atoms/icon/WarnIcon";
+import CheckboxTailwild from "@/shared/ui/atoms/checkbox";
 
 const data = [
   {
@@ -198,15 +199,13 @@ const columns: ColumnDef<Row>[] = [
   {
     id: "select",
     header: ({ table }) => (
-      <input
-        type="checkbox"
+      <CheckboxTailwild
         checked={table.getIsAllRowsSelected()}
         onChange={table.getToggleAllRowsSelectedHandler()}
       />
     ),
     cell: ({ row }) => (
-      <input
-        type="checkbox"
+      <CheckboxTailwild
         checked={row.getIsSelected()}
         onChange={row.getToggleSelectedHandler()}
       />
@@ -246,13 +245,29 @@ const columns: ColumnDef<Row>[] = [
   {
     accessorKey: "missingLang",
     header: "미입력 언어",
+    cell: ({ getValue }) => {
+      const value = getValue<string>();
+      return (
+        <span className="inline-flex gap-2 items-center justify-center text-[0] leading-[0]">
+          <i>
+            <WarnIcon />
+          </i>
+          <span className="text-[#333333]">{value}</span>
+        </span>
+      );
+    },
   },
 
   {
     id: "action",
     header: "",
     cell: ({ row }) => (
-      <button className="cursor-pointer inline-flex justify-center items-center" onClick={() => console.log(row.original)}><PenIcon /></button>
+      <button
+        className="cursor-pointer inline-flex justify-center items-center"
+        onClick={() => console.log(row.original)}
+      >
+        <PenIcon />
+      </button>
     ),
   },
 ];
@@ -288,7 +303,7 @@ const PagesBoard = () => {
   });
 
   const thClassMap: Record<string, string> = {
-    select: "text-center",
+    select: "text-center text-[0] leading-[0] align-middle",
     isVisible: "text-center",
     country: "text-left",
     category: "text-left",
@@ -298,12 +313,12 @@ const PagesBoard = () => {
   };
 
   const tdClassMap: Record<string, string> = {
-    select: "text-center",
+    select: "text-center text-[0] leading-[0] align-middle",
     isVisible: "text-center",
     country: "",
     category: "",
     title: "",
-    missingLang: "",
+    missingLang: "text-left text-[0] leading-[0] align-middle",
     action: "text-center text-[0] leading-[0] align-middle",
   };
   const labelStyle =
@@ -324,7 +339,21 @@ const PagesBoard = () => {
               </label>
             </li>
             <li>
-              <div className="bg-gray-200 p-2.5">폼요소</div>
+              <div className="select-container">
+                <Select.Root>
+                  <Select.Trigger
+                    placeholder="선택"
+                    id="search_form_item_01"
+                    className="w-full h-8.5 rounded-sm border border-[#D7DCE5] bg-white px-3 text-[13px] text-[#888]"
+                  />
+                  <Select.Content>
+                    <Select.Group>
+                      <Select.Item value="on">ON</Select.Item>
+                      <Select.Item value="off">OFF</Select.Item>
+                    </Select.Group>
+                  </Select.Content>
+                </Select.Root>
+              </div>
             </li>
             <li>
               <label htmlFor="search_form_item_02" className={labelStyle}>
@@ -332,7 +361,23 @@ const PagesBoard = () => {
               </label>
             </li>
             <li>
-              <div className="bg-gray-200 p-2.5">폼요소</div>
+              <div className="select-container">
+                <Select.Root>
+                  <Select.Trigger
+                    placeholder="선택"
+                    id="search_form_item_02"
+                    className="w-full h-8.5 rounded-sm border border-[#D7DCE5] bg-white px-3 text-[13px] text-[#888]"
+                  />
+                  <Select.Content>
+                    <Select.Group>
+                      <Select.Item value="usa">
+                        United States, Canada
+                      </Select.Item>
+                      <Select.Item value="mexico">Mexico, Brazil</Select.Item>
+                    </Select.Group>
+                  </Select.Content>
+                </Select.Root>
+              </div>
             </li>
             <li>
               <label htmlFor="search_form_item_03" className={labelStyle}>
@@ -340,7 +385,21 @@ const PagesBoard = () => {
               </label>
             </li>
             <li>
-              <div className="bg-gray-200 p-2.5">폼요소</div>
+              <div className="select-container">
+                <Select.Root>
+                  <Select.Trigger
+                    placeholder="선택"
+                    id="search_form_item_03"
+                    className="w-full h-8.5 rounded-sm border border-[#D7DCE5] bg-white px-3 text-[13px] text-[#888]"
+                  />
+                  <Select.Content>
+                    <Select.Group>
+                      <Select.Item value="hyundai">현대캐피탈</Select.Item>
+                      <Select.Item value="daewoo">대우캐피탈</Select.Item>
+                    </Select.Group>
+                  </Select.Content>
+                </Select.Root>
+              </div>
             </li>
             <li>
               <label htmlFor="search_form_item_04" className={labelStyle}>
@@ -348,7 +407,21 @@ const PagesBoard = () => {
               </label>
             </li>
             <li>
-              <div className="bg-gray-200 p-2.5">폼요소</div>
+              <div className="select-container">
+                <Select.Root>
+                  <Select.Trigger
+                    placeholder="선택"
+                    id="search_form_item_04"
+                    className="w-full h-8.5 rounded-sm border border-[#D7DCE5] bg-white px-3 text-[13px] text-[#888]"
+                  />
+                  <Select.Content>
+                    <Select.Group>
+                      <Select.Item value="kor">kor</Select.Item>
+                      <Select.Item value="usa">usa</Select.Item>
+                    </Select.Group>
+                  </Select.Content>
+                </Select.Root>
+              </div>
             </li>
             <li>
               <label htmlFor="search_form_item_05" className={labelStyle}>
@@ -356,7 +429,7 @@ const PagesBoard = () => {
               </label>
             </li>
             <li>
-              <div className="bg-gray-200 p-2.5">폼요소</div>
+              <InputCustom />
             </li>
             <li className="col-span-6">
               <div className="flex justify-end gap-2">
@@ -375,7 +448,6 @@ const PagesBoard = () => {
             <strong className="font-medium leading-none text-black">
               총 234건
             </strong>
-            <div className="bg-gray-200 p-2.5">셀렉트폼</div>
           </div>
           <div className="flex items-center gap-2 justify-end">
             <Button color="gray" variant="surface">
@@ -397,7 +469,7 @@ const PagesBoard = () => {
             <col className="w-[15%]" />
             <col />
             <col className="w-[10%]" />
-            <col className="w-15" />
+            <col className="w-30" />
           </colgroup>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
